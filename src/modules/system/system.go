@@ -7,5 +7,6 @@ import (
 func New() *fiber.App {
 	system := fiber.New()
 	system.Get("/health", Health)
+	system.Get("/memory", Memory)
 	return system
 }

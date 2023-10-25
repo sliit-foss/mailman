@@ -2,11 +2,11 @@ package v1
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"mailman/src/dto"
+	"mailman/src/global"
 )
 
 func Login(c *fiber.Ctx) error {
-	return c.JSON(dto.Response[*interface{}]{
+	return c.JSON(global.Response[*interface{}]{
 		Message: "Login successful",
 	})
 }

@@ -1,16 +1,33 @@
 package main
 
 import (
+	"mailman/src/global"
+	"mailman/src/modules"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/log"
-	"mailman/src/modules"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/helmet"
+	"github.com/gofiber/fiber/v2/middleware/monitor"
+	"github.com/gofiber/fiber/v2/middleware/requestid"
 )
 
 func main() {
 	app := fiber.New(fiber.Config{
-		AppName:           "Mailman",
-		EnablePrintRoutes: true,
+		AppName: "Mailman",
 	})
+
+	app.Use(cors.New())
+
+	app.Use(helmet.New())
+
+	app.Get("/metrics", monitor.New())
+
+	app.Use(requestid.New(requestid.Config{
+		Header: global.CORRELATION_ID,
+	}))
+
 	app.Mount("/api", modules.New())
+
 	log.Fatal(app.Listen(":3001"))
 }

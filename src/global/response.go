@@ -1,4 +1,4 @@
-package dto
+package global
 
 type Response[T any] struct {
 	Message string `json:"message"`
