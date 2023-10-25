@@ -1,0 +1,11 @@
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      glob: '*.{go,js,yml,json}'
+      run: npm run format && git add .
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx commitlint --edit --color

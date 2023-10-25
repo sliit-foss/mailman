@@ -1,0 +1,12 @@
+{
+  "name": "mailman",
+  "scripts": {
+    "format": "gofmt -w ./src",
+    "prepare": "lefthook install"
+  },
+  "dependencies": {
+    "@commitlint/cli": "17.6.5",
+    "@commitlint/config-conventional": "17.6.5",
+    "lefthook": "1.4.3"
+  }
+}

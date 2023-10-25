@@ -1,8 +1,8 @@
 package v1
 
 import (
-	"mailman/src/dto"
 	"github.com/gofiber/fiber/v2"
+	"mailman/src/dto"
 )
 
 func Login(c *fiber.Ctx) error {
@@ -10,4 +10,3 @@ func Login(c *fiber.Ctx) error {
 		Message: "Login successful",
 	})
 }
-

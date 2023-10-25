@@ -1,11 +1,11 @@
-package system;
+package system
 
 import (
-    "github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2"
 )
 
 func New() *fiber.App {
-    system := fiber.New()
-    system.Get("/health", Health)
-    return system
+	system := fiber.New()
+	system.Get("/health", Health)
+	return system
 }

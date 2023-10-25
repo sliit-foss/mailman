@@ -1,8 +1,8 @@
 package system
 
 import (
-	"mailman/src/dto"
 	"github.com/gofiber/fiber/v2"
+	"mailman/src/dto"
 )
 
 func Health(c *fiber.Ctx) error {
@@ -10,4 +10,3 @@ func Health(c *fiber.Ctx) error {
 		Message: "Mailman up and running",
 	})
 }
-
