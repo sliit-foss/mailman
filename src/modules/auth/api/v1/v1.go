@@ -6,6 +6,6 @@ import (
 
 func New() *fiber.App {
 	v1 := fiber.New()
-	v1.Get("/login", Login)
+	v1.Post("/login", Login)
 	return v1
 }

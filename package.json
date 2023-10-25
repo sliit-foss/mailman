@@ -1,6 +1,8 @@
 {
   "name": "mailman",
   "scripts": {
+    "build": "go build -o ./bin/mailman ./src",
+    "dev": "air",
     "format": "gofmt -w ./src",
     "prepare": "lefthook install"
   },
