@@ -11,6 +11,7 @@ import (
 	"github.com/gofiber/fiber/v2/log"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/helmet"
+	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/gofiber/fiber/v2/middleware/monitor"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
@@ -28,6 +29,15 @@ func main() {
 	app.Use(cors.New())
 
 	app.Use(helmet.New())
+
+	app.Use(limiter.New(limiter.Config{
+		Max: 100,
+		LimitReached: func(c *fiber.Ctx) error {
+			return c.Status(fiber.StatusTooManyRequests).JSON(global.Response[*interface{}]{
+				Message: "Too many requests, please try again later",
+			})
+		},
+	}))
 
 	app.Use(recover.New())
 
