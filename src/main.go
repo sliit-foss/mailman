@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"mailman/src/config"
 	"mailman/src/global"
 	"mailman/src/modules"
 
@@ -13,6 +15,9 @@ import (
 )
 
 func main() {
+
+	config.Load()
+
 	app := fiber.New(fiber.Config{
 		AppName: "Mailman",
 	})
@@ -29,5 +34,5 @@ func main() {
 
 	app.Mount("/api", modules.New())
 
-	log.Fatal(app.Listen(":3001"))
+	log.Fatal(app.Listen(fmt.Sprintf(":%s", config.Env.Port)))
 }
