@@ -1,6 +1,6 @@
 # Mailman
 
-### Centralized mail server for FOSS@SLIIT
+### Central server for a standalone template email service
 
 ## Prerequisites
 
