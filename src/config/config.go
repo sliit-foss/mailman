@@ -13,13 +13,20 @@ type Config struct {
 var Env *Config
 
 func Load() {
-	Env = loadEnvVariables()
+	Env = load()
 }
 
-func loadEnvVariables() (config *Config) {
+func setDefaults() {
+	viper.SetDefault("PORT", "8080")
+}
+
+func load() (config *Config) {
 	viper.AddConfigPath(".")
 	viper.SetConfigName(".env")
 	viper.SetConfigType("env")
+
+	setDefaults()
+
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatal("Error reading env file", err)
 	}
