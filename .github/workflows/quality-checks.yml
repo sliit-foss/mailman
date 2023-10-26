@@ -1,0 +1,22 @@
+name: Quality Checks
+run-name: Quality Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  commitlint:
+    name: Commitlint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository 🛎️
+        uses: actions/checkout@v3
+
+      - name: Run commitlint 🟩
+        uses: sliit-foss/actions/quality-checks/commitlint@main
