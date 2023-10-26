@@ -1,9 +1,14 @@
 package models
 
 import (
+	"context"
+	"mailman/src/database"
 	"time"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type UserRole string
@@ -39,4 +44,11 @@ func (u User) WithDefaults() User {
 	u.CreatedAt = time.Now().Format(time.RFC3339)
 	u.UpdatedAt = time.Now().Format(time.RFC3339)
 	return u
+}
+
+func SyncIndexes() {
+	database.UseDefault().Collection("users").Indexes().CreateOne(context.Background(), mongo.IndexModel{
+		Keys:    bson.D{{Key: "email", Value: -1}},
+		Options: options.Index().SetUnique(true),
+	})
 }

@@ -16,7 +16,7 @@ func ErrorHandler(ctx *fiber.Ctx, err error) error {
 		code = e.Code
 		message = e.Message
 	}
-	log.Error("Request error:", err.Error())
+	log.Error("Request error: ", err.Error())
 	return ctx.Status(code).JSON(global.Response[*interface{}]{
 		Message: message,
 	})

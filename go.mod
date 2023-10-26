@@ -5,10 +5,12 @@ go 1.21.3
 require (
 	github.com/go-playground/validator/v10 v10.15.5
 	github.com/gofiber/fiber/v2 v2.50.0
+	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/google/uuid v1.3.1
 	github.com/sethvargo/go-password v0.2.0
 	github.com/spf13/viper v1.17.0
 	go.mongodb.org/mongo-driver v1.12.1
+	golang.org/x/crypto v0.14.0
 )
 
 require (
@@ -47,7 +49,6 @@ require (
 	github.com/youmark/pkcs8 v0.0.0-20181117223130-1be2e3e5546d // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
-	golang.org/x/crypto v0.13.0 // indirect
 	golang.org/x/exp v0.0.0-20230905200255-921286631fa9 // indirect
 	golang.org/x/net v0.15.0 // indirect
 	golang.org/x/sync v0.3.0 // indirect

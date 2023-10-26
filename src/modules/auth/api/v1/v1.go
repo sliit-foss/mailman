@@ -9,5 +9,6 @@ import (
 func New() *fiber.App {
 	v1 := fiber.New()
 	v1.Post("/login", m.Validate[dto.LoginReq](m.Body), Login)
+	v1.Post("/register", m.Validate[dto.RegisterReq](m.Body), Register)
 	return v1
 }

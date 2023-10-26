@@ -2,11 +2,10 @@ package database
 
 import (
 	"context"
-	"mailman/src/config"
-
 	"github.com/gofiber/fiber/v2/log"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"mailman/src/config"
 )
 
 var client *mongo.Client
