@@ -2,7 +2,7 @@ package users
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"mailman/src/modules/auth/api/v1"
+	"mailman/src/modules/users/api/v1"
 )
 
 func New() *fiber.App {

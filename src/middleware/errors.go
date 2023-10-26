@@ -5,6 +5,7 @@ import (
 	"mailman/src/global"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/log"
 )
 
 func ErrorHandler(ctx *fiber.Ctx, err error) error {
@@ -15,6 +16,7 @@ func ErrorHandler(ctx *fiber.Ctx, err error) error {
 		code = e.Code
 		message = e.Message
 	}
+	log.Error("Request error:", err.Error())
 	return ctx.Status(code).JSON(global.Response[*interface{}]{
 		Message: message,
 	})

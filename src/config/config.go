@@ -6,7 +6,8 @@ import (
 )
 
 type Config struct {
-	Port string `mapstructure:"PORT"`
+	Port                  string `mapstructure:"PORT"`
+	MongoConnectionString string `mapstructure:"MONGO_CONNECTION_STRING"`
 }
 
 var Env *Config
