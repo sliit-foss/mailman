@@ -8,8 +8,12 @@ import (
 )
 
 func Login(c *fiber.Ctx) error {
-	return c.JSON(global.Response[*interface{}]{
+	payload := new(dto.LoginReq)
+	c.BodyParser(payload)
+	res := loginWithEmailAndPassword(c, payload.Email, payload.Password)
+	return c.JSON(global.Response[dto.LoginRes]{
 		Message: "Login successful",
+		Data:    res,
 	})
 }
 

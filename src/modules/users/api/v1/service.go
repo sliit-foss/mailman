@@ -12,13 +12,13 @@ import (
 )
 
 func createUser(c *fiber.Ctx, payload dto.CreateUserReq) *dto.CreateUserRes {
-	log.Info("Creating user within system", payload.Email)
+	log.Info("Creating user within system - ", payload.Email)
 	verificationCode := uuid.New().String()
 	generatedPassword, _ := password.Generate(8, 2, 1, false, false)
 	insertedID := repository.Create(models.User{
 		Email:            payload.Email,
 		Name:             payload.Name,
-		VerificationCode: verificationCode,
+		VerificationCode: &verificationCode,
 		Password:         utils.HashStr(generatedPassword),
 	}.WithDefaults())
 	return &dto.CreateUserRes{

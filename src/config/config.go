@@ -8,6 +8,7 @@ import (
 type Config struct {
 	Port                  string `mapstructure:"PORT"`
 	MongoConnectionString string `mapstructure:"MONGO_CONNECTION_STRING"`
+	JWTSecret             string `mapstructure:"JWT_SECRET"`
 }
 
 var Env *Config

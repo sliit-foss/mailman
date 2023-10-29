@@ -2,8 +2,13 @@ package utils
 
 import (
 	"context"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"errors"
+	"fmt"
 	"mailman/src/database"
+
+	"github.com/gofiber/fiber/v2/log"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Repository[T any] struct {
@@ -22,11 +27,22 @@ func (r Repository[T]) Create(payload T) primitive.ObjectID {
 	return result.InsertedID.(primitive.ObjectID)
 }
 
-func (r Repository[T]) FindByID(id primitive.ObjectID) T {
-	user := new(T)
-	doc := database.UseDefault().Collection(r.collection).FindOne(context.TODO(), primitive.M{"_id": id})
-	doc.Decode(&user)
-	return *user
+func (r Repository[T]) FindOne(query primitive.M) *T {
+	model := new(T)
+	doc := database.UseDefault().Collection(r.collection).FindOne(context.Background(), query)
+	if doc.Err() != nil {
+		if errors.Is(doc.Err(), mongo.ErrNoDocuments) {
+			log.Error(fmt.Sprintf("%v %s", r, doc.Err().Error()))
+			return nil
+		}
+		panic(doc.Err())
+	}
+	doc.Decode(&model)
+	return model
+}
+
+func (r Repository[T]) FindByID(id primitive.ObjectID) *T {
+	return r.FindOne(primitive.M{"_id": id})
 }
 
 func (r Repository[T]) FindAll() []T {
