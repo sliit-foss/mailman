@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"encoding/json"
 	"mailman/src/config"
 	"mailman/src/modules/users/api/v1/models"
 	"time"
@@ -15,6 +16,7 @@ func GenerateUserJWTToken(user models.User, refresh bool) string {
 		expiry = time.Hour * 24
 	}
 	claims := jwt.MapClaims{
+		"iss":  "SLIIT FOSS",
 		"iat":  time.Now().Unix(),
 		"exp":  time.Now().Add(expiry).Unix(),
 		"data": user,
@@ -38,6 +40,8 @@ func ValidateUserJWTToken(token string) *models.User {
 	if !ok {
 		panic(fiber.NewError(fiber.StatusUnauthorized, "Invalid token"))
 	}
-	user := claims["data"].(models.User)
+	user := models.User{}
+	jsonString, _ := json.Marshal(claims["data"])
+	json.Unmarshal(jsonString, &user)
 	return &user
 }

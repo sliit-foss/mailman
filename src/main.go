@@ -51,7 +51,7 @@ func main() {
 	app.Get("/metrics", monitor.New())
 
 	app.Use(requestid.New(requestid.Config{
-		Header: global.CORRELATION_ID,
+		Header: global.HeaderXCorrelationID,
 	}))
 
 	app.Use(logger.New(logger.Config{

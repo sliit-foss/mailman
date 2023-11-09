@@ -1,5 +1,5 @@
 package global
 
 const (
-	CORRELATION_ID = "X-Correlation-ID"
+	HeaderXCorrelationID = "X-Correlation-ID"
 )
